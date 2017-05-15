@@ -7,7 +7,7 @@ class PostsNew extends Component {
             <div className="form-group">
                 <label>{field.label}</label>
                 <input className="form-control" type="text" {...field.input} />
-                {filed.meta.error}
+                {field.meta.error}
             </div>
         );
     }
@@ -55,6 +55,6 @@ function validate(values) {
 }
 
 export default reduxForm({
-    vakudate,
+    validate,
     form: "PostsNewForm"
 })(PostsNew);
