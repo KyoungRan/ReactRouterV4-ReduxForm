@@ -1,17 +1,19 @@
-import React, {Component} from "react";
-import {Field, reduxForm} from "redux-form";
-import {Link} from "react-router-dom";
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 class PostsNew extends Component {
     renderField(field) {
-        const {meta: {touched, error}} = field;
-        const className = `form-group ? ${touched && error ? "has-danger" : ""}`;
+        const { meta: { touched, error } } = field;
+        const className = `form-group ? ${touched && error ? 'has-danger' : ''}`;
         return (
             <div className={className}>
                 <label>{field.label}</label>
                 <input className="form-control" type="text" {...field.input} />
                 <div className="text-help">
-                    {touched ? error : ""}
+                    {touched ? error : ''}
                 </div>
             </div>
         );
@@ -19,11 +21,12 @@ class PostsNew extends Component {
 
     onSubmit(values) {
         // this === component
-        console.log(values);
+        // console.log(values);
+        this.props.createPost(values);
     }
 
     render() {
-        const {handleSubmit} = this.props;
+        const { handleSubmit } = this.props;
         return (
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
@@ -56,13 +59,13 @@ function validate(values) {
 
     // Validate the inputs from 'values'
     if (!values.title || values.title.length < 3) {
-        errors.title = "Enter a title that is at least 3 characters!";
+        errors.title = 'Enter a title that is at least 3 characters!';
     }
     if (!values.categories) {
-        errors.categories = "Enter some categories";
+        errors.categories = 'Enter some categories';
     }
     if (!values.content) {
-        errors.content = "Enter some content please";
+        errors.content = 'Enter some content please';
     }
     // If errors is empty, the form is fine to submit
     // If errors has *any* properties, redux form assumes form is invalid
@@ -71,5 +74,5 @@ function validate(values) {
 
 export default reduxForm({
     validate,
-    form: "PostsNewForm"
-})(PostsNew);
+    form: 'PostsNewForm'
+})(connect(null, { createPost })(PostsNew));

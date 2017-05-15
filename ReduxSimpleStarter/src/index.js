@@ -12,12 +12,13 @@ import PostsNew from './components/PostsNew';
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <BrowserRouter>
-      <div>
-        <Route exact path="/" component={PostsIndex} />
-        <Route path="/posts/new" component={PostsNew} />
-      </div>
-    </BrowserRouter>
-  </Provider>
-  , document.querySelector('.container'));
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <BrowserRouter>
+            <div>
+                <Route exact path="/" component={PostsIndex} />
+                <Route path="/posts/new" component={PostsNew} />
+            </div>
+        </BrowserRouter>
+    </Provider>,
+    document.querySelector('.container')
+);

@@ -15,8 +15,8 @@ class PostsIndex extends Component {
                 <li className="list-group-item" key={post.id}>
                     {post.title}
                 </li>
-            )
-        })
+            );
+        });
     }
 
     render() {
@@ -33,12 +33,12 @@ class PostsIndex extends Component {
                     {this.renderPosts()}
                 </ul>
             </div>
-        )
+        );
     }
 }
 
 function mapStateToProps(state) {
-    return { posts: state.posts }
+    return { posts: state.posts };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
