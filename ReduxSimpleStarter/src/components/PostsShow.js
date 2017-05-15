@@ -4,15 +4,23 @@ import { fetchPost } from '../actions';
 
 class PostsShow extends Component {
     componentDidMount() {
-        const { id } = this.props.match.params.id;
-        this.props.fetchPost();
+        const { id } = this.props.match.params;
+        this.props.fetchPost(id);
     }
 
     render() {
         // posts[this.props.match.params.id]; // the post we want to show
+        const { post } = this.props;
+
+        if (!post) {
+            return <div>Loading...</div>;
+        }
+
         return (
             <div>
-                Posts Show
+                <h3>{post.title}</h3>
+                <h6>Categories: {post.categories}</h6>
+                <p>{post.content}</p>
             </div>
         );
     }
